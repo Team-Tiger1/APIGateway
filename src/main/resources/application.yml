@@ -17,16 +17,13 @@ spring:
         - id: user-service
           uri: http://localhost:8081
           predicates:
-            - Path=/users/**
-            - Path=/vendors/**
-            - Path=/auth/**
+            - Path=/users/**,Path=/vendors/**,Path=/auth/**
 
 
         - id: product-service
           uri: http://localhost:8082
           predicates:
-            - Path=/product/**
-            - Path=/bundles/**
+            - Path=/product/**,Path=/bundles/**
 
       globalcors:
         cors-configurations:
@@ -48,5 +45,5 @@ management:
     web:
       exposure:
         include: health,info,metrics
-
+debug: true
 
