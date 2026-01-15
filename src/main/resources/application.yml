@@ -41,7 +41,12 @@ spring:
               - PATCH
             allowedHeaders: "*"
             allowCredentials: true
-debug: false
 
+#Exposes actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
 
 
