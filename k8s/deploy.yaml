@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: ghcr.io/PLACEHOLDER/api-gateway:latest
+          image: ghcr.io/team-tiger1/apigateway:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

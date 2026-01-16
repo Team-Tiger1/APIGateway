@@ -3,8 +3,12 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  contents: read
+  packages: write
+
 env:
-  IMAGE_NAME: ghcr.io/team-tiger1/api-gateway
+  IMAGE_NAME: ghcr.io/team-tiger1/apigateway
 
 jobs:
   build-and-deploy:
