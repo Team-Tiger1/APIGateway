@@ -4,7 +4,7 @@ on:
     branches: [ "main" ]
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/api-gateway
+  IMAGE_NAME: ghcr.io/team-tiger1/api-gateway
 
 jobs:
   build-and-deploy:
