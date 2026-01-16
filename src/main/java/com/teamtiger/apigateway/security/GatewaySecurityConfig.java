@@ -26,8 +26,8 @@ public class GatewaySecurityConfig {
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(HttpMethod.OPTIONS).permitAll()
-                        .pathMatchers("/users/login", "/users/register", "/auth/refresh",
-                                "/vendors/login", "/vendors/register", "/actuator/**").permitAll().anyExchange().authenticated())
+                        .pathMatchers("/api/users/login", "/api/users/register", "/api/auth/refresh",
+                                "/api/vendors/login", "/api/vendors/register", "/actuator/**").permitAll().anyExchange().authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> {
                             jwtSpec.jwtDecoder(reactiveJwtDecoder());
