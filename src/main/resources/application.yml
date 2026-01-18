@@ -25,9 +25,19 @@ spring:
 
 
         - id: product-service
-          uri: http://localhost:8082
+          #uri: http://localhost:8082
+          uri: http://product-service:8082
           predicates:
             - Path=/api/product/**,/api/bundles/**
+          filters:
+            - StripPrefix=1
+
+
+
+        - id: forecast-service
+          uri: http://192.168.0.225:5000
+          predicates:
+            - Path=/api/forecast/**
           filters:
             - StripPrefix=1
 
