@@ -15,7 +15,6 @@ spec:
       containers:
         - name: api-gateway
           image: ghcr.io/team-tiger1/apigateway:latest
-
           resources:
             requests:
               memory: "64Mi"
@@ -23,7 +22,6 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
-
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
@@ -50,20 +48,3 @@ spec:
   ports:
     - port: 80
       targetPort: 8080
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: gateway-ingress
-spec:
-  rules:
-    - host: thelastfork.shop
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: api-gateway-service
-                port:
-                  number: 80
