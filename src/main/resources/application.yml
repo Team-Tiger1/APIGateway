@@ -24,15 +24,15 @@ spring:
             - Path=/userservice/**
 
         - id: product-service
-          #uri: http://localhost:8082
+#          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
-            - Path=/api/product/**,/api/bundles/**
+            - Path=/api/product/**,/api/bundles/**,/api/productservice/**
           filters:
             - StripPrefix=1
 
         - id: product-service-swagger
-#          uri: http://localhost:8081
+#          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
               - Path=/productservice/**
