@@ -5,11 +5,6 @@ spring:
   application:
     name: API-GATEWAY-SERVICE
 
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          secret: ${JWT_SECRET}
 
   cloud:
     gateway:
@@ -18,11 +13,15 @@ spring:
           #uri: http://localhost:8081
           uri: http://user-service:8081
           predicates:
-            - Path=/api/users/**,/api/vendors/**,/api/auth/**
+            - Path=/api/users/**,/api/vendors/**,/api/auth/**,/api/userservice/**
           filters:
             - StripPrefix=1
 
-
+        - id: user-service-swagger
+#          uri: http://localhost:8081
+          uri: http://user-service:8081
+          predicates:
+            - Path=/userservice/**
 
         - id: product-service
           #uri: http://localhost:8082
@@ -41,19 +40,6 @@ spring:
           filters:
             - StripPrefix=1
 
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:63342"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-              - PATCH
-            allowedHeaders: "*"
-            allowCredentials: true
 
 #Exposes actuator endpoints
 management:
