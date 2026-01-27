@@ -15,7 +15,7 @@ import java.util.Base64;
 @Configuration
 public class GatewaySecurityConfig {
 
-    @Value("${JWT_SECRET}")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Bean

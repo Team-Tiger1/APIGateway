@@ -10,7 +10,7 @@ spring:
     gateway:
       routes:
         - id: user-service
-          #uri: http://localhost:8081
+#          uri: http://localhost:8081
           uri: http://user-service:8081
           predicates:
             - Path=/api/users/**,/api/vendors/**,/api/auth/**,/api/userservice/**
@@ -27,7 +27,7 @@ spring:
 #          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
-            - Path=/api/product/**,/api/bundles/**,/api/productservice/**
+            - Path=/api/products/**,/api/bundles/**,/api/productservice/**,/api/reservations/**
           filters:
             - StripPrefix=1
 
@@ -53,5 +53,3 @@ management:
     web:
       exposure:
         include: health,info,metrics
-debug: true
-
