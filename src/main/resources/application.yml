@@ -47,6 +47,21 @@ spring:
             - StripPrefix=1
 
 
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders: "*"
+            allowCredentials: true
+
+
 #Exposes actuator endpoints
 management:
   endpoints:
