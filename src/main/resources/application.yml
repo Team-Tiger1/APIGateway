@@ -47,21 +47,6 @@ spring:
             - StripPrefix=1
 
 
-      globalcors:
-        cors-configurations:
-          '[/**]':
-            allowedOrigins:
-              - "http://localhost:63344"
-              - "https://thelastfork.shop"
-            allowedMethods:
-              - GET
-              - POST
-              - PUT
-              - DELETE
-              - OPTIONS
-              - PATCH
-            allowedHeaders: "*"
-            allowCredentials: true
 
 
 #Exposes actuator endpoints
