@@ -52,7 +52,7 @@ spring:
           '[/**]':
             allowedOriginPatterns:
               - "http://localhost:*"
-              - "https://thelastfork.shop/*"
+              - "https://thelastfork.shop"
             allowedMethods:
               - GET
               - POST
