@@ -50,7 +50,7 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOriginPatterns:
+            allowedOrigins:
               - "http://localhost:63344"
               - "https://thelastfork.shop"
             allowedMethods:
