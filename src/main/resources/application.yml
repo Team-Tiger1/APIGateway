@@ -51,7 +51,7 @@ spring:
         cors-configurations:
           '[/**]':
             allowedOriginPatterns:
-              - "http://localhost:*"
+              - "http://localhost:63344"
               - "https://thelastfork.shop"
             allowedMethods:
               - GET
