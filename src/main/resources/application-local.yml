@@ -1,0 +1,70 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY-SERVICE
+
+
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          #          uri: http://localhost:8081
+          uri: http://user-service:8081
+          predicates:
+            - Path=/api/users/**,/api/vendors/**,/api/auth/**,/api/userservice/**
+          filters:
+            - StripPrefix=1
+
+        - id: user-service-swagger
+          #          uri: http://localhost:8081
+          uri: http://user-service:8081
+          predicates:
+            - Path=/userservice/**
+
+        - id: product-service
+          #          uri: http://localhost:8082
+          uri: http://product-service:8082
+          predicates:
+            - Path=/api/products/**,/api/bundles/**,/api/productservice/**,/api/reservations/**
+          filters:
+            - StripPrefix=1
+
+        - id: product-service-swagger
+          #          uri: http://localhost:8082
+          uri: http://product-service:8082
+          predicates:
+            - Path=/productservice/**
+
+
+
+        - id: forecast-service
+          uri: http://forecast-service:5000
+          predicates:
+            - Path=/api/forecast/**
+          filters:
+            - StripPrefix=1
+
+
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+              - PATCH
+            allowedHeaders: "*"
+            allowCredentials: true
+
+
+#Exposes actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
