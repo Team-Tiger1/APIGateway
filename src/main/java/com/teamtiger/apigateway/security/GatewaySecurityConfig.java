@@ -33,7 +33,8 @@ public class GatewaySecurityConfig {
                                 "/api/userservice/**",
                                 "/userservice/**",
                                 "/api/productservice/**",
-                                "/productservice/**").permitAll().anyExchange().authenticated())
+                                "/productservice/**").permitAll()
+                        .anyExchange().authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> {
                             jwtSpec.jwtDecoder(reactiveJwtDecoder());
