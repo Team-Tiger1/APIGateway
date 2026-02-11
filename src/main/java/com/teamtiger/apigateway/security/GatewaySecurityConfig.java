@@ -34,7 +34,8 @@ public class GatewaySecurityConfig {
                                 "/userservice/**",
                                 "/api/productservice/**",
                                 "/productservice/**",
-                                "/api/forecastservice/**").permitAll()
+                                "/api/forecastservice/**",
+                                "api/forecast/actuator").permitAll()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> {
