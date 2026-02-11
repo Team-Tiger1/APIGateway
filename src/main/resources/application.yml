@@ -10,7 +10,6 @@ spring:
     gateway:
       routes:
         - id: user-service
-#          uri: http://localhost:8081
           uri: http://user-service:8081
           predicates:
             - Path=/api/users/**,/api/vendors/**,/api/auth/**,/api/userservice/**
@@ -18,13 +17,11 @@ spring:
             - StripPrefix=1
 
         - id: user-service-swagger
-#          uri: http://localhost:8081
           uri: http://user-service:8081
           predicates:
             - Path=/userservice/**
 
         - id: product-service
-#          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
             - Path=/api/products/**,/api/bundles/**,/api/productservice/**,/api/reservations/**
@@ -32,11 +29,9 @@ spring:
             - StripPrefix=1
 
         - id: product-service-swagger
-#          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
               - Path=/productservice/**
-
 
 
         - id: forecast-service
@@ -45,6 +40,7 @@ spring:
             - Path=/api/forecast/**
           filters:
             - StripPrefix=1
+
 
 
       globalcors:

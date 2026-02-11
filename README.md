@@ -8,6 +8,13 @@ This service handles:
 - CORS Configuration
 
 
+The diagram below highlights where in our architecture the API Gateway operates.
+
+<p>
+  <img src="Architecture_APIGateway.png" alt="Project Logo" height="500px">
+</p>
+
+
 ## Tech Stack
 
 ### Core & Build
