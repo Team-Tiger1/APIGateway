@@ -37,7 +37,7 @@ spring:
         - id: forecast-service
           uri: http://192.168.0.225:5000
           predicates:
-            - Path=/api/forecast/**
+            - Path=/api/forecast/**,/api/forecastservice/**
           filters:
             - StripPrefix=1
 

@@ -42,7 +42,7 @@ spring:
         - id: forecast-service
           uri: http://forecast-service:5000
           predicates:
-            - Path=/api/forecast/**
+            - Path=/api/forecast/**,/api/forecastservice/**
           filters:
             - StripPrefix=1
 
