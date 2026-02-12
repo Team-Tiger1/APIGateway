@@ -18,6 +18,14 @@ public class GatewaySecurityConfig {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
+    /**
+     * This enforces a valid token on every request that passes through, except for the urls specified
+     * Disables CSRF
+     * Specifies URL's on a Whitelist
+     * Checks access token for valid signature and expiry
+     * @param http ServerHttpSecurity allows configuration for http requests
+     * @return The configured SecurityWebFilterChain
+     */
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
@@ -35,7 +43,7 @@ public class GatewaySecurityConfig {
                                 "/api/productservice/**",
                                 "/productservice/**",
                                 "/api/forecastservice/**",
-                                "api/forecast/actuator").permitAll()
+                                "/api/forecast/actuator").permitAll()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> {
@@ -44,6 +52,11 @@ public class GatewaySecurityConfig {
         return http.build();
     }
 
+    /**
+     * Explicitly states a decoder for the JWT tokens
+     * Algorithm: HmacSHA256
+     * @return A ReactiveJwtDecoder that's used by the Security Web Filter
+     */
     @Bean
     public ReactiveJwtDecoder reactiveJwtDecoder() {
         return NimbusReactiveJwtDecoder.withSecretKey(new SecretKeySpec(

@@ -5,7 +5,8 @@ spring:
   application:
     name: API-GATEWAY-SERVICE
 
-
+#Specifies the service that a request must go to based on its URL
+#Strips the /api prefix from the request and passes it downstream
   cloud:
     gateway:
       routes:
@@ -42,7 +43,7 @@ spring:
             - StripPrefix=1
 
 
-
+#CORS configuration to allow methods from specified origins
       globalcors:
         cors-configurations:
           '[/**]':
