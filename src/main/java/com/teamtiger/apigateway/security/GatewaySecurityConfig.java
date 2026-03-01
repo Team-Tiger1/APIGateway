@@ -44,6 +44,11 @@ public class GatewaySecurityConfig {
                                 "/productservice/**",
                                 "/api/forecastservice/**",
                                 "/api/forecast/actuator").permitAll()
+
+                        .pathMatchers("/management/**",
+                                "/admin-dashboard/**",
+                                "/instances/**",
+                                "/instances").permitAll()
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> {

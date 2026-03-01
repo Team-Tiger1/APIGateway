@@ -4,9 +4,18 @@ server:
 spring:
   application:
     name: API-GATEWAY-SERVICE
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8080/admin-dashboard"
+        instance:
+          management-base-url: "http://localhost:8080"
+          service-base-url: "http://localhost:8080"
+        api-path: instances
+      context-path: /admin-dashboard
 
-#Specifies the service that a request must go to based on its URL
-#Strips the /api prefix from the request and passes it downstream
+  #Specifies the service that a request must go to based on its URL
+  #Strips the /api prefix from the request and passes it downstream
   cloud:
     gateway:
       routes:
@@ -32,7 +41,7 @@ spring:
         - id: product-service-swagger
           uri: http://product-service:8082
           predicates:
-              - Path=/productservice/**
+            - Path=/productservice/**
 
 
         - id: forecast-service
@@ -44,7 +53,7 @@ spring:
             - StripPrefix=1
 
 
-#CORS configuration to allow methods from specified origins
+      #CORS configuration to allow methods from specified origins
       globalcors:
         cors-configurations:
           '[/**]':
@@ -66,5 +75,15 @@ spring:
 management:
   endpoints:
     web:
+      base-path: /management
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,logfile,loggers
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    de.codecentric.boot.admin: WARN
+  file:
+    name: "logs/api-gateway.log"
