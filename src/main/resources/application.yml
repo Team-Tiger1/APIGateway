@@ -8,7 +8,7 @@ spring:
   boot:
     admin:
       client:
-        url: "http://api-gateway-service:8080/admin-dashboard"
+        url: "http://api-gateway:8080/admin-dashboard"
         instance:
           management-base-url: "https://thelastfork.shop"
           service-base-url: "https://thelastfork.shop/management"
