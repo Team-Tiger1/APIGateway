@@ -4,13 +4,22 @@ server:
 spring:
   application:
     name: API-GATEWAY-SERVICE
+  boot:
+    admin:
+      client:
+        url: "http://localhost:8080/admin-dashboard"
+        instance:
+          management-base-url: "http://localhost:8080"
+          service-base-url: "http://localhost:8080"
+        api-path: instances
+      context-path: /admin-dashboard
 
-
+  #Specifies the service that a request must go to based on its URL
+  #Strips the /api prefix from the request and passes it downstream
   cloud:
     gateway:
       routes:
         - id: user-service
-          #          uri: http://localhost:8081
           uri: http://user-service:8081
           predicates:
             - Path=/api/users/**,/api/vendors/**,/api/auth/**,/api/userservice/**
@@ -18,13 +27,11 @@ spring:
             - StripPrefix=1
 
         - id: user-service-swagger
-          #          uri: http://localhost:8081
           uri: http://user-service:8081
           predicates:
             - Path=/userservice/**
 
         - id: product-service
-          #          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
             - Path=/api/products/**,/api/bundles/**,/api/productservice/**,/api/reservations/**
@@ -32,14 +39,13 @@ spring:
             - StripPrefix=1
 
         - id: product-service-swagger
-          #          uri: http://localhost:8082
           uri: http://product-service:8082
           predicates:
             - Path=/productservice/**
 
 
-
         - id: forecast-service
+          #uri: http://192.168.0.225:5000
           uri: http://forecast-service:5000
           predicates:
             - Path=/api/forecast/**,/api/forecastservice/**
@@ -47,10 +53,13 @@ spring:
             - StripPrefix=1
 
 
+      #CORS configuration to allow methods from specified origins
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOriginPatterns: "*"
+            allowedOriginPatterns:
+              - "http://localhost:*"
+              - "https://thelastfork.shop"
             allowedMethods:
               - GET
               - POST
@@ -66,5 +75,15 @@ spring:
 management:
   endpoints:
     web:
+      base-path: /management
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,logfile,loggers
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    de.codecentric.boot.admin: WARN
+  file:
+    name: "logs/api-gateway.log"
