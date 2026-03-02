@@ -7,6 +7,8 @@ spring:
     name: API-GATEWAY-SERVICE
   boot:
     admin:
+      ui:
+        public-url: "https://thelastfork.shop/api/admin-dashboard/"
       client:
         url: "http://localhost:8080/api/admin-dashboard"
         instance:

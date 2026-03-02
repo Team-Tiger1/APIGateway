@@ -4,13 +4,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.adapter.ForwardedHeaderTransformer;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.crypto.spec.SecretKeySpec;
+import java.net.URI;
 import java.util.Base64;
 
 @Configuration
@@ -70,8 +75,23 @@ public class GatewaySecurityConfig {
     }
 
     @Bean
-    public ForwardedHeaderTransformer forwardedHeaderTransformer() {
-        return new ForwardedHeaderTransformer();
+    public WebFilter forceHttpsFilter() {
+        return (exchange, chain) -> {
+            URI uri = exchange.getRequest().getURI();
+
+            if ("http".equalsIgnoreCase(uri.getScheme())) {
+                URI httpsUri = UriComponentsBuilder.fromUri(uri)
+                        .scheme("https")
+                        .port(443)
+                        .build()
+                        .toUri();
+
+                return chain.filter(exchange.mutate()
+                        .request(exchange.getRequest().mutate().uri(httpsUri).build())
+                        .build());
+            }
+            return chain.filter(exchange);
+        };
     }
 
 }
