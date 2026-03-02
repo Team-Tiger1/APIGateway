@@ -8,6 +8,7 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.server.adapter.ForwardedHeaderTransformer;
 
 import javax.crypto.spec.SecretKeySpec;
 import java.util.Base64;
@@ -66,6 +67,11 @@ public class GatewaySecurityConfig {
     public ReactiveJwtDecoder reactiveJwtDecoder() {
         return NimbusReactiveJwtDecoder.withSecretKey(new SecretKeySpec(
                 Base64.getDecoder().decode(jwtSecret), "HmacSHA256")).build();
+    }
+
+    @Bean
+    public ForwardedHeaderTransformer forwardedHeaderTransformer() {
+        return new ForwardedHeaderTransformer();
     }
 
 }
