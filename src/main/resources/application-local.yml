@@ -4,15 +4,6 @@ server:
 spring:
   application:
     name: API-GATEWAY-SERVICE
-  boot:
-    admin:
-      client:
-        url: "http://localhost:8080/admin-dashboard"
-        instance:
-          management-base-url: "http://localhost:8080"
-          service-base-url: "http://localhost:8080"
-        api-path: instances
-      context-path: /admin-dashboard
 
   #Specifies the service that a request must go to based on its URL
   #Strips the /api prefix from the request and passes it downstream
@@ -75,15 +66,5 @@ spring:
 management:
   endpoints:
     web:
-      base-path: /management
       exposure:
-        include: health,info,metrics,logfile,loggers
-  endpoint:
-    health:
-      show-details: always
-
-logging:
-  level:
-    de.codecentric.boot.admin: WARN
-  file:
-    name: "logs/api-gateway.log"
+        include: health,info,metrics

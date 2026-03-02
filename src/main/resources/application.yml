@@ -1,24 +1,12 @@
 server:
   port: 8080
-  forward-headers-strategy: framework
 
 spring:
   application:
     name: API-GATEWAY-SERVICE
-  boot:
-    admin:
-      ui:
-        public-url: "https://thelastfork.shop/api/admin-dashboard/"
-      client:
-        url: "http://localhost:8080/api/admin-dashboard"
-        instance:
-          management-base-url: "https://thelastfork.shop"
-          service-base-url: "https://thelastfork.shop/management"
-        api-path: instances
-      context-path: /api/admin-dashboard
 
-  #Specifies the service that a request must go to based on its URL
-  #Strips the /api prefix from the request and passes it downstream
+#Specifies the service that a request must go to based on its URL
+#Strips the /api prefix from the request and passes it downstream
   cloud:
     gateway:
       routes:
@@ -44,7 +32,7 @@ spring:
         - id: product-service-swagger
           uri: http://product-service:8082
           predicates:
-            - Path=/productservice/**
+              - Path=/productservice/**
 
 
         - id: forecast-service
@@ -56,7 +44,7 @@ spring:
             - StripPrefix=1
 
 
-      #CORS configuration to allow methods from specified origins
+#CORS configuration to allow methods from specified origins
       globalcors:
         cors-configurations:
           '[/**]':
@@ -78,15 +66,5 @@ spring:
 management:
   endpoints:
     web:
-      base-path: /management
       exposure:
-        include: health,info,metrics,logfile,loggers
-  endpoint:
-    health:
-      show-details: always
-
-logging:
-  level:
-    de.codecentric.boot.admin: WARN
-  file:
-    name: "logs/api-gateway.log"
+        include: health,info,metrics

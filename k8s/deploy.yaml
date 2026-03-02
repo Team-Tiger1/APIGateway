@@ -33,7 +33,7 @@ spec:
                   key: jwt-secret
           readinessProbe:
             httpGet:
-              path: /management/health
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 15
             periodSeconds: 5
