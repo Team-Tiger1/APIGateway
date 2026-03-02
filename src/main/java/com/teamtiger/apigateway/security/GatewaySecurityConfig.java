@@ -8,11 +8,8 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.web.server.WebFilter;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.crypto.spec.SecretKeySpec;
-import java.net.URI;
 import java.util.Base64;
 
 @Configuration
@@ -47,7 +44,6 @@ public class GatewaySecurityConfig {
                                 "/productservice/**",
                                 "/api/forecastservice/**",
                                 "/api/forecast/actuator").permitAll()
-
                         .anyExchange().authenticated())
                 .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec
                         .jwt(jwtSpec -> {
@@ -66,6 +62,5 @@ public class GatewaySecurityConfig {
         return NimbusReactiveJwtDecoder.withSecretKey(new SecretKeySpec(
                 Base64.getDecoder().decode(jwtSecret), "HmacSHA256")).build();
     }
-
 
 }
