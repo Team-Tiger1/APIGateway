@@ -46,7 +46,7 @@ public class GatewaySecurityConfig {
                                 "/api/forecast/actuator").permitAll()
 
                         .pathMatchers("/management/**",
-                                "/admin-dashboard/**",
+                                "/api/admin-dashboard/**",
                                 "/instances/**",
                                 "/instances").permitAll()
                         .anyExchange().authenticated())
