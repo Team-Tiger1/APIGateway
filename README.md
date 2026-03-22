@@ -46,7 +46,8 @@ The diagram below highlights where in our architecture the API Gateway operates.
 
 - Setting up all CI/CD workflows to handle
   1. Automatic testing on push of main branch on the API Gateway repository
-  2. Automatic Deployment onto k3s with zero downtime on completion of automatic testing so broken code won't make it to deployment
+  2. Automatic Deployment onto k3s with **zero downtime** on completion of automatic testing so broken code won't make it to deployment
 - Helped Daniel Jackson in the diagnosis and fixing of the CORS Errors and configuration.
+- **Added SpotBugs Dependancy to perform SAST**
 
 
